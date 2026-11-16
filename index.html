@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Para Camila ❤️ Una invitación especial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Canvas de fondo para partículas y corazones flotantes -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Controles flotantes de accesibilidad y sonido -->
+  <nav class="floating-controls" aria-label="Controles de reproducción">
+    <button id="toggle-motion-btn" class="control-btn" type="button" aria-label="Pausar animaciones">
+      <span class="btn-icon">⏸️</span>
+      <span class="btn-text">Pausar</span>
+    </button>
+    <button id="sound-btn" class="control-btn" type="button" aria-label="Activar música de fondo">
+      <span class="btn-icon">🎵</span>
+      <span class="btn-text">Música</span>
+    </button>
+  </nav>
+
+  <main class="page-wrapper">
+    <!-- PANTALLA 1: La Carta Cerrada / Bienvenida -->
+    <section id="step-envelope" class="scene active-scene" aria-labelledby="envelope-title">
+      <div class="envelope-card">
+        <div class="stamp-heart" aria-hidden="true">💌</div>
+        <h1 id="envelope-title" class="script-title">Hola, Cami...</h1>
+        <p class="tagline">Preparé una sorpresa especial solo para vos.</p>
+        <button id="open-envelope-btn" class="cta-button pulse" type="button">
+          <span>Abrir mi invitación</span>
+          <span class="arrow-icon">✨</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- PANTALLA 2: La Historia, Recuerdos y Fotos que Compartimos -->
+    <section id="step-story" class="scene" aria-labelledby="story-title">
+      <header class="section-header">
+        <span class="badge">Nuestros Recuerdos</span>
+        <h2 id="story-title" class="main-title">Momentos que compartimos</h2>
+        <p class="subtitle">Cada instante con vos hace que todo valga la pena.</p>
+      </header>
+
+      <!-- Galería de Polaroids Interactiva (Momentos juntos) -->
+      <div class="polaroid-gallery">
+        <figure class="polaroid-item tilt-left" tabindex="0">
+          <div class="polaroid-img-wrapper">
+            <img src="us1.jpg" alt="Nosotros pintando juntos en el parque" loading="lazy">
+          </div>
+          <figcaption class="polaroid-caption">Pintando juntos en el parque (S ❤️ C)</figcaption>
+        </figure>
+
+        <figure class="polaroid-item tilt-center" tabindex="0">
+          <div class="polaroid-img-wrapper">
+            <img src="us3.jpg" alt="Foto en el parque al atardecer" loading="lazy">
+          </div>
+          <figcaption class="polaroid-caption">Atardeceres y sonrisas juntos 🌅</figcaption>
+        </figure>
+
+        <figure class="polaroid-item tilt-right" tabindex="0">
+          <div class="polaroid-img-wrapper">
+            <img src="us2.jpg" alt="Un momento inolvidable juntos" loading="lazy">
+          </div>
+          <figcaption class="polaroid-caption">Risas y complicidad ✨</figcaption>
+        </figure>
+      </div>
+
+      <!-- Tarjetas Interactivas con datos -->
+      <div class="cards-grid">
+        <!-- Tarjeta 1: El día que nos conocimos -->
+        <article class="memory-card" tabindex="0" role="button" aria-expanded="false">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="icon-circle">🗓️</div>
+              <h3>5 de Octubre</h3>
+              <p class="peek-text">El día que todo empezó...</p>
+              <span class="flip-hint">Tocá para leer</span>
+            </div>
+            <div class="card-back">
+              <div class="icon-circle small">✨</div>
+              <h4>El Inicio</h4>
+              <p>El 5 de octubre nos conocimos y desde ese día supe que la vida se ponía mucho más linda a tu lado.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tarjeta 2: Mila (con su foto especial) -->
+        <article class="memory-card card-mila" tabindex="0" role="button" aria-expanded="false">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-photo-thumb">
+                <img src="mila.jpg" alt="Mila celebrando su cumpleaños" loading="lazy">
+              </div>
+              <h3>Mila</h3>
+              <p class="peek-text">Tu mayor adoración...</p>
+              <span class="flip-hint">Tocá para leer</span>
+            </div>
+            <div class="card-back">
+              <div class="card-photo-mini">
+                <img src="mila.jpg" alt="Mila" loading="lazy">
+              </div>
+              <h4>Tu amor incondicional</h4>
+              <p>Mila es tu adoración y la amás con todo el corazón. Verte cuidarla con tanta ternura desde siempre muestra lo enorme y hermoso que es tu corazón. 🐾❤️</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tarjeta 3: Pasión Maquillaje -->
+        <article class="memory-card" tabindex="0" role="button" aria-expanded="false">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="icon-circle">💄</div>
+              <h3>Tu Arte</h3>
+              <p class="peek-text">Tu talento y brillo...</p>
+              <span class="flip-hint">Tocá para leer</span>
+            </div>
+            <div class="card-back">
+              <div class="icon-circle small">💋</div>
+              <h4>Pura Magia</h4>
+              <p>Te apasiona el maquillaje y tenés un talento increíble para resaltar la belleza. Aunque entre nosotros... ¡tu sonrisa al natural es insuperable!</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tarjeta 4: Smash Burgers -->
+        <article class="memory-card" tabindex="0" role="button" aria-expanded="false">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="icon-circle">🍔</div>
+              <h3>Gauchos</h3>
+              <p class="peek-text">Nuestra debilidad...</p>
+              <span class="flip-hint">Tocá para leer</span>
+            </div>
+            <div class="card-back">
+              <div class="icon-circle small">🔥</div>
+              <h4>Smash 1/2 Libra</h4>
+              <p>Esas smash burgers de Gauchos son nuestro antojo favorito compartido: comida deliciosa, charlas infinitas y risas cómplices.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tarjeta 5: Cumpleaños -->
+        <article class="memory-card highlight-card" tabindex="0" role="button" aria-expanded="false">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="icon-circle">🎊</div>
+              <h3>3 de Agosto</h3>
+              <p class="peek-text">Una fecha sagrada...</p>
+              <span class="flip-hint">Tocá para leer</span>
+            </div>
+            <div class="card-back">
+              <div class="icon-circle small">👑</div>
+              <h4>3 de Agosto de 2001</h4>
+              <p>El día que nació Camila Ospino: la persona más hermosa, auténtica y maravillosa que alegra mis días.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="step-footer">
+        <button id="to-invitation-btn" class="cta-button primary" type="button">
+          <span>Ver mi invitación especial</span>
+          <span class="arrow-icon">💌</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- PANTALLA 3: La Invitación al Restaurante Cecilia -->
+    <section id="step-invitation" class="scene" aria-labelledby="invitation-title">
+      <div class="ticket-container">
+        <div class="ticket-header">
+          <span class="ticket-tag">RESERVA CONFIRMADA · MESA PARA 2</span>
+          <div class="ticket-logo-brand">cecilia</div>
+          <h2 id="invitation-title" class="ticket-title">Una Noche Especial en Parque 93</h2>
+        </div>
+        <div class="ticket-body">
+          <div class="ticket-row">
+            <span class="ticket-label">Invitada de honor:</span>
+            <span class="ticket-value">Camila Ospino</span>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-label">Anfitrión:</span>
+            <span class="ticket-value">Jose Sebastian Barrios</span>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-label">Lugar:</span>
+            <span class="ticket-value">Cecilia (Parque 93) 🥂</span>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-label">Fecha:</span>
+            <span class="ticket-value">Noviembre 28</span>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-label">Hora:</span>
+            <span class="ticket-value">07:00 PM</span>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-label">Código de vestimenta:</span>
+            <span class="ticket-value">Tan hermosa como siempre</span>
+          </div>
+        </div>
+
+        <!-- Mini Cuenta Regresiva -->
+        <div class="countdown-box">
+          <span class="countdown-label">Faltan muy pocos días:</span>
+          <div class="countdown-grid" id="countdown-timer">
+            <div class="time-block"><span class="time-num" id="cd-days">--</span><span class="time-lbl">Días</span></div>
+            <div class="time-block"><span class="time-num" id="cd-hours">--</span><span class="time-lbl">Hs</span></div>
+            <div class="time-block"><span class="time-num" id="cd-minutes">--</span><span class="time-lbl">Min</span></div>
+            <div class="time-block"><span class="time-num" id="cd-seconds">--</span><span class="time-lbl">Seg</span></div>
+          </div>
+        </div>
+
+        <div class="ticket-divider"></div>
+        <div class="ticket-footer">
+          <p class="ticket-note">Tengo muchas ganas de verte y compartir una noche muy especial con vos...</p>
+          <button id="to-rsvp-btn" class="cta-button pulse" type="button">
+            <span>¿Aceptás la invitación? ❤️</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 4: La Confirmación / RSVP Interactiva -->
+    <section id="step-rsvp" class="scene" aria-labelledby="rsvp-heading">
+      <div class="proposal-card">
+        <div class="ring-animation" aria-hidden="true">
+          <span class="sparkle s1">✨</span>
+          <span class="heart-center">🥂</span>
+          <span class="sparkle s2">✨</span>
+        </div>
+        <h2 id="rsvp-heading" class="proposal-title">
+          Cami...
+        </h2>
+        <p class="proposal-question">¿Aceptás esta cita conmigo?</p>
+        <p class="proposal-caption">Prometo una noche mágica en Cecilia Parque 93, risas cómplices y un momento inolvidable mirándote a los ojos.</p>
+
+        <div class="decision-zone" id="decision-zone">
+          <button id="yes-btn" class="btn-decision btn-yes" type="button">
+            <span class="btn-heart">❤️</span> ¡OBVIO QUE SÍ!
+          </button>
+          <button id="no-btn" class="btn-decision btn-no" type="button">
+            No
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL / MENSAJE FINAL DE ÉXITO Y CITA CONFIRMADA -->
+    <section id="success-modal" class="success-screen" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="success-title">
+      <div class="success-content">
+        <div class="success-badge">🎉 ¡CITA CONFIRMADA! 🎉</div>
+        <h2 id="success-title" class="script-title big">¡Nos vemos en Cecilia!</h2>
+        <div class="success-photo-container">
+          <img src="us1.jpg" alt="Nosotros juntos sonriendo" class="modal-couple-img">
+        </div>
+        <p class="love-letter">
+          No te imaginás las ganas que tengo de compartir esta velada con vos en Cecilia Parque 93. <br>
+          Agendado: <strong>Viernes 28 de Noviembre a las 7:00 PM</strong>. <br>
+          Ponete tan linda como siempre... que de todo lo demás me encargo yo.
+        </p>
+
+        <!-- Botones para agregar a Calendario (Google Calendar y Apple Calendar) -->
+        <div class="calendar-actions-wrapper">
+          <span class="calendar-cta-title">Agendalo directamente en tu calendario:</span>
+          <div class="calendar-btn-group">
+            <a id="gcal-btn" href="#" target="_blank" rel="noopener noreferrer" class="calendar-btn gcal-btn">
+              <span class="cal-icon">📅</span> Google Calendar
+            </a>
+            <button id="ical-btn" type="button" class="calendar-btn ical-btn" aria-label="Agregar a Apple Calendar">
+              <img src="apple-logo.png" alt="" class="apple-cal-icon" width="20" height="20" aria-hidden="true"><span>Apple Calendar</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="love-signature">
+          Jose & Cami (con la bendición de Mila) ❤️🐾
+        </div>
+        <button id="restart-celebration-btn" class="cta-button secondary" type="button">
+          <span>Lanzar más confeti 🎊</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
