@@ -318,15 +318,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 8. Control de Sonido
+  // 8. Control de Sonido (Ed Sheeran - Thinking Out Loud)
   const soundBtn = document.getElementById('sound-btn');
-  if (soundBtn) {
+  const bgMusic = document.getElementById('bg-music');
+
+  if (soundBtn && bgMusic) {
+    bgMusic.volume = 0.65;
+
     soundBtn.addEventListener('click', () => {
-      isAudioEnabled = !isAudioEnabled;
-      initAudio();
-      soundBtn.querySelector('.btn-text').textContent = isAudioEnabled ? 'Música: On' : 'Música: Off';
-      soundBtn.querySelector('.btn-icon').textContent = isAudioEnabled ? '🔊' : '🎵';
-      if (isAudioEnabled) playChime();
+      if (bgMusic.paused) {
+        bgMusic.play().then(() => {
+          isAudioEnabled = true;
+          soundBtn.querySelector('.btn-text').textContent = 'Música: On';
+          soundBtn.querySelector('.btn-icon').textContent = '🔊';
+          soundBtn.classList.add('playing');
+        }).catch(err => {
+          console.warn('Audio play failed:', err);
+        });
+      } else {
+        bgMusic.pause();
+        isAudioEnabled = false;
+        soundBtn.querySelector('.btn-text').textContent = 'Música: Off';
+        soundBtn.querySelector('.btn-icon').textContent = '🎵';
+        soundBtn.classList.remove('playing');
+      }
     });
   }
 

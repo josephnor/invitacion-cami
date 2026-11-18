@@ -91,6 +91,24 @@ body {
   background: #ffffff;
 }
 
+.control-btn.playing {
+  background: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 12px rgba(230, 57, 99, 0.35);
+  animation: musicPulse 2s infinite ease-in-out;
+}
+
+@keyframes musicPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(230, 57, 99, 0.25);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 16px rgba(230, 57, 99, 0.45);
+  }
+}
+
 /* Main Container */
 .page-wrapper {
   position: relative;
