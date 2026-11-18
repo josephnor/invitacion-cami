@@ -215,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const openEnvelopeBtn = document.getElementById('open-envelope-btn');
   if (openEnvelopeBtn) {
     openEnvelopeBtn.addEventListener('click', () => {
+      tryPlayMusic();
       switchScene('step-envelope', 'step-story');
     });
   }
@@ -318,23 +319,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 8. Control de Sonido (Ed Sheeran - Thinking Out Loud)
+  // 8. Control de Sonido y Reproducción Automática (Ed Sheeran - Thinking Out Loud)
   const soundBtn = document.getElementById('sound-btn');
   const bgMusic = document.getElementById('bg-music');
 
-  if (soundBtn && bgMusic) {
+  function tryPlayMusic() {
+    if (!bgMusic || !bgMusic.paused) return;
     bgMusic.volume = 0.65;
+    bgMusic.play().then(() => {
+      isAudioEnabled = true;
+      if (soundBtn) {
+        soundBtn.querySelector('.btn-text').textContent = 'Música: On';
+        soundBtn.querySelector('.btn-icon').textContent = '🔊';
+        soundBtn.classList.add('playing');
+      }
+    }).catch(err => {
+      // Bloqueado por política de autoplay del navegador hasta la primera interacción
+      console.log('Autoplay a la espera de interacción del usuario:', err);
+    });
+  }
 
-    soundBtn.addEventListener('click', () => {
+  // Intentar reproducir automáticamente al cargar la página
+  tryPlayMusic();
+  window.addEventListener('load', tryPlayMusic, { once: true });
+
+  // Si el navegador bloquea el autoplay inicial sin toque previo (ej. iOS Safari / Android Chrome),
+  // se activa automáticamente al primer toque/clic en cualquier parte de la pantalla
+  const unlockEvents = ['click', 'touchstart', 'touchend', 'keydown'];
+  function onFirstUserInteraction() {
+    tryPlayMusic();
+    unlockEvents.forEach(evt => document.removeEventListener(evt, onFirstUserInteraction));
+  }
+  unlockEvents.forEach(evt => document.addEventListener(evt, onFirstUserInteraction, { once: true, passive: true }));
+
+  if (soundBtn && bgMusic) {
+    soundBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (bgMusic.paused) {
-        bgMusic.play().then(() => {
-          isAudioEnabled = true;
-          soundBtn.querySelector('.btn-text').textContent = 'Música: On';
-          soundBtn.querySelector('.btn-icon').textContent = '🔊';
-          soundBtn.classList.add('playing');
-        }).catch(err => {
-          console.warn('Audio play failed:', err);
-        });
+        tryPlayMusic();
       } else {
         bgMusic.pause();
         isAudioEnabled = false;
